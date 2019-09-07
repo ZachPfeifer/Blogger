@@ -8,7 +8,7 @@ export default class CommentController {
   constructor() {
     this.router = express.Router()
       //NOTE all routes after the authenticate method will require the user to be logged in to access
-      .get('', this.getAll)
+      // .get('', this.getAll)
       .get('/:id', this.getById)
       .use(Authorize.authenticated)
       .post('', this.create)
@@ -16,14 +16,14 @@ export default class CommentController {
       .delete('/:id', this.delete)
   }
 
-  async getAll(req, res, next) {
-    try {
-      let data = await _commentService.find({ author: req.params.id })
-        .populate('author', ['name']) // <-- only return the Persons name
-      return res.send(data)
-    } catch (error) { next(error) }
+  // async getAll(req, res, next) {
+  //   try {
+  //     let data = await _commentService.find({ author: req.params.id })
+  //       .populate('author', ['name']) // <-- only return the Persons name
+  //     return res.send(data)
+  //   } catch (error) { next(error) }
 
-  }
+  // }
 
   async getById(req, res, next) {
     try {
