@@ -8,9 +8,9 @@ export default class BlogController {
     constructor() {
         this.router = express.Router()
             //NOTE all routes after the authenticate method will require the user to be logged in to access
-            .use(Authorize.authenticated)
             .get('', this.getAll)
             .get('/:id', this.getById)
+            .use(Authorize.authenticated)
             .post('', this.create)
             .put('/:id', this.edit)
             .delete('/:id', this.delete)
@@ -45,7 +45,7 @@ export default class BlogController {
 
     async edit(req, res, next) {
         try {
-            let data = await _blogService.findOneAndUpdate({ _id: req.params.id, }, req.body, { new: true })
+            let data = await _blogService.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, req.body, { new: true })
             if (data) {
                 return res.send(data)
             }
@@ -57,7 +57,7 @@ export default class BlogController {
 
     async delete(req, res, next) {
         try {
-            await _blogService.findOneAndRemove({ _id: req.params.id })
+            await _blogService.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
             res.send("deleted blog")
         } catch (error) { next(error) }
 

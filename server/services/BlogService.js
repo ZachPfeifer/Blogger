@@ -5,7 +5,7 @@ const ObjectId = Schema.Types.ObjectId
 const _model = new Schema({
     title: { type: String, max: 60, required: true },
     summary: { type: String, max: 120, required: true },
-    author: {},
+    // author: {},
     authorId: { type: ObjectId, ref: 'User', required: true },
     //FIXME New Service for this \/
     img: { type: String, default: 'https://placeold.it/200x200' },
@@ -28,6 +28,6 @@ const _model = new Schema({
 
 export default class BlogService {
     get repository() {
-        return mongoose.model('value', _model)
+        return mongoose.model('blog', _model)
     }
 }
