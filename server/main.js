@@ -45,7 +45,7 @@ server.use('/account', new AuthController().router)
 import BlogController from './controllers/BlogController'
 
 //NOTE remember the forward slash at the start of your path!
-server.use('/api/blog', new BlogController().router)
+server.use('/api/blogs', new BlogController().router)
 
 
 
