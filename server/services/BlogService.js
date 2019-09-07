@@ -5,11 +5,11 @@ const ObjectId = Schema.Types.ObjectId
 const _model = new Schema({
     title: { type: String, max: 60, required: true },
     summary: { type: String, max: 120 },
-    // author: { type: ObjectId, ref: 'User', }, //required: true },
-    authorId: { type: ObjectId, ref: 'User', required: true },
+    // authorId: { type: ObjectId, ref: 'User', required: true },
+    author: { type: ObjectId, ref: 'User', required: true },
     //FIXME New Service for this \/
-    img: { type: String, default: 'https://placeold.it/200x200' },
-    body: { type: String }
+    img: { type: String, default: 'https://placeold.it' },
+    body: { type: String },
 }, { timestamps: true })
 
 
