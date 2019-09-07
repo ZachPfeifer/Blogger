@@ -43,9 +43,11 @@ server.use('/account', new AuthController().router)
 
 //NOTE we have to import access to our controllers
 import BlogController from './controllers/BlogController'
+import CommentController from './controllers/CommentController'
 
 //NOTE remember the forward slash at the start of your path!
 server.use('/api/blogs', new BlogController().router)
+server.use('/api/comments', new CommentController().router)
 
 
 
