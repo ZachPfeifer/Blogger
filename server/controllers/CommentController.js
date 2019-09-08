@@ -19,7 +19,7 @@ export default class CommentController {
   // async getAll(req, res, next) {
   //   try {
   //     let data = await _commentService.find({ author: req.params.id })
-  //       .populate('author', ['name']) // <-- only return the Persons name
+  //       .populate('author', 'name') // <-- only return the Persons name
   //     return res.send(data)
   //   } catch (error) { next(error) }
 
@@ -28,7 +28,7 @@ export default class CommentController {
   async getById(req, res, next) {
     try {
       let data = await _commentService.findById(req.params.id)
-        .populate('author', ['name'])
+        .populate('author', 'name')
       if (!data) {
         throw new Error("Invalid Id")
       }
@@ -48,11 +48,10 @@ export default class CommentController {
   async edit(req, res, next) {
     try {
       let data = await _commentService.findOneAndUpdate({ _id: req.params.id, author: req.session.uid }, req.body, { new: true })
-        .populate('author', ['name'])
+        .populate('author', 'name')
       if (data) {
         return res.send(data)
-      }
-      throw new Error("invalid id")
+      } throw new Error("invalid id")
     } catch (error) {
       next(error)
     }
@@ -63,8 +62,7 @@ export default class CommentController {
       let data = await _commentService.findOneAndRemove({ _id: req.params.id, author: req.session.uid })
       if (!data) {
         throw new Error("invalid id, you didn't say the magic word")
-      }
-      res.send("deleted")
+      } res.send("deleted")
     } catch (error) { next(error) }
 
   }
